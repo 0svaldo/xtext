@@ -13,6 +13,7 @@ pipeline {
         }
       }
     }
+    
     stage('Generate site') {
       steps {
         echo 'Building..'
@@ -30,6 +31,7 @@ pipeline {
         }
       }
     }
+    
     stage('Commit changes') {
       steps {
         dir ('deploy-xtext-git-repo') {
@@ -42,7 +44,7 @@ pipeline {
         }
         dir ('deploy-xtend-git-repo') {
           sh '''
-            cp -r $WORKSPACE/git-repo/xtext-website/_site/* .
+            cp -r $WORKSPACE/git-repo/xtend-website/_site/* .
             git diff
             git add --all :/ && git commit -m "Generated from commit: https://github.com/eclipse/xtext/commit/$GIT_COMMIT"
             git status
